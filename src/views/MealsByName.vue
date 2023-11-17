@@ -15,26 +15,18 @@
       :key="meal.idMeal"
       class="bg-white shadow rounded-xl"
     >
-    <img
+      <router-link :to="{ name: 'mealDetails', params: { id: meal.idMeal } }">
+        <img
           :src="meal.strMealThumb"
-          :alt="strMeal"
+          :alt="meal.strMeal"
           class="rounded-t-xl w-full h-48 object-cover"
         />
+      </router-link>
       <div class="p-3">
         <h3 class="font-bold">{{ meal.strMeal }}</h3>
         <p class="mb-4"></p>
         <div class="flex items-center justify-between">
-          <a
-            :href="meal.strYoutube"
-            target="_blank"
-            class="px-3 py-2 rounded border-2 text-white border-red-600 bg-red-500 hover:bg-red-600 hover:text-white transition-colors"
-            >Youtube
-          </a>
-          <!-- <router-link 
-            class="px-3 py-2 rounded border-2 text-white border-purple-600 bg-purple-500 hover:bg-purple-600 hover:text-white transition-colors"
-          >
-            View
-          </router-link> -->
+          <YoutubeButton :href="meal.strYoutube">Youtube</YoutubeButton>
         </div>
       </div>
     </div>
@@ -46,6 +38,7 @@ import { onMounted, ref } from "vue";
 import store from "../store";
 import { computed } from "@vue/reactivity";
 import { useRoute } from "vue-router";
+import YoutubeButton from "../components/YoutubeButton.vue";
 
 const route = useRoute();
 const keyword = ref("");
